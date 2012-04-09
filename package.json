@@ -3,6 +3,7 @@
     , "version": "0.0.1"
     , "dependencies": {
         "underscore": ">= 1.0.0"
-        , "codejam": ">= 0.0.1"
+        , "codejam" : ">= 0.0.1"
+        , "bigint"  : ">= 0.3.8"
     }
 }

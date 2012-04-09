@@ -1,4 +1,7 @@
 Solutions for google code jam problems
 
-* if you're using node.js, you'll need to have node and npm, then npm install dependencies
+* You need to have node and npm
+* You need to have libgmp-dev for bigint (see https://github.com/substack/node-bigint)
+* You need to `npm install` dependencies
+
 
