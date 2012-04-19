@@ -30,33 +30,6 @@ while (++cnum <= gcj.numCases) {
       }
   });
 
-/*
-  g.forEach(function(g) {
-    if (g >= p * 3) {
-    }
-    var scores = [];
-    scores[0] = Math.ceil(g/3);
-    scores[1] = Math.ceil((g - scores[0]) / 2);
-    scores[2] = g - (scores[0] + scores[1]);
-    scores = scores.sort().reverse();
-
-    if (scores[0] >= p) {
-      ++r;
-    } else if (s) {
-      var off_by = p - scores[0];
-      if (off_by <= 2) {
-        scores[2] = scores.last() - off_by;
-        scores[0] = scores[0] + off_by;
-        var sum = und.reduce(scores, function(memo, num){ return memo + num; }, 0);
-        if (scores[2] >= 0 && sum === g) {
-          --s;
-          ++r;
-        }
-      }
-    }
-  });
-*/
-
   console.log("Case #{c}: {r}".supplant({
       'c': cnum
     , 'r': r
