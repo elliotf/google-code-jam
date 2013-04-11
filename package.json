@@ -1,9 +1,9 @@
 {
-    "name": "google-code-jam"
-    , "version": "0.0.1"
-    , "dependencies": {
-        "underscore": ">= 1.0.0"
-        , "codejam" : ">= 0.0.1"
-        , "bigint"  : ">= 0.3.8"
-    }
+  "name": "google-code-jam",
+  "version": "0.1.0",
+  "dependencies": {
+    "underscore": "*",
+    "codejam": "*",
+    "bignum": "*"
+  }
 }
