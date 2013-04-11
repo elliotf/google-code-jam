@@ -2,8 +2,9 @@
   "name": "google-code-jam",
   "version": "0.1.0",
   "dependencies": {
-    "underscore": "*",
+    "bignum": "*",
     "codejam": "*",
-    "bignum": "*"
+    "underscore": "*",
+    "underscore.string": "*"
   }
 }
