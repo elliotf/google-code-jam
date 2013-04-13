@@ -1,0 +1,21 @@
+{
+  "undef":      true
+  , "laxbreak": true
+  , "loopfunc": true
+  , "laxcomma": true
+  , "node":     true
+  , "strict":   false
+  , "es5":      true
+  , "predef":   [
+    "Backbone"
+    , "before"
+    , "beforeEach"
+    , "describe"
+    , "it"
+    , "JadeTemplates"
+    , "jQuery"
+    , "should"
+    , "xam"
+    , "window"
+  ]
+}

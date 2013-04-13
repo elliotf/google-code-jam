@@ -5,6 +5,7 @@
     "bignum": "*",
     "codejam": "*",
     "underscore": "*",
-    "underscore.string": "*"
+    "underscore.string": "*",
+    "chicken-little": "~0.1.2"
   }
 }
