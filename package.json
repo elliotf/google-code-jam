@@ -6,6 +6,7 @@
     "codejam": "*",
     "underscore": "*",
     "underscore.string": "*",
-    "chicken-little": "~0.1.2"
+    "chicken-little": "~0.1.2",
+    "bigint": "git+ssh://git@github.com:changtimwu/node-bigint.git"
   }
 }
