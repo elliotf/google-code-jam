@@ -1,16 +1,26 @@
 #!/usr/bin/env node
 
-// http://code.google.com/codejam/contest/1460488/dashboard#s=p1
+/*
+
+  http://code.google.com/codejam/contest/1460488/dashboard#s=p1
+
+  develop with (running in the current directory):
+    ../node_modules/.bin/chicken -c "clear; cat B-sample.in | ./b.js" .
+
+*/
 
 // props to shopkins for the assist!
 
-var gcj   = require('./codejam');
-var und   = require('underscore');
-var input = gcj.getInput();
-var cnum  = 0;
+var fs    = require('fs')
+  , _     = require('underscore')
+  , str   = require('underscore.string')
+  , input = fs.readFileSync('/dev/stdin').toString().split(/\n/g)
+  , cnum  = 0
+  , cases = input.shift()
+;
 
-while (++cnum <= gcj.numCases) {
-  var g = input.shift();
+while (++cnum <= cases) {
+  var g = input.shift().split(/\s+/).map(function(n){return parseInt(n, 10);});
   var n = g.shift();
   var s = g.shift();
   var p = g.shift();
@@ -30,8 +40,5 @@ while (++cnum <= gcj.numCases) {
       }
   });
 
-  console.log("Case #{c}: {r}".supplant({
-      'c': cnum
-    , 'r': r
-  }));
+  console.log(str.sprintf("Case #%d: %s", cnum, r));
 }
