@@ -21,35 +21,50 @@ while (cnum++ < cases) {
 
   // naive:
   // for every position
-  // get a substring of at least length n from that position to all later positions
-  // if that substring has n consonants in a row, increment
+  // Get a substring of at least length n from that position to all later
+  //   positions
+  // If that substring has n consonants in a row, increment
 
-  // shortcuts: if the n consonants happen early on, don't bother counting each subsequent position invididually
+  // Naive solution does not work when n is large.  Substring search with
+  //   large n results in scanning the name L*n times
 
   var ins  = input.shift().split(' ');
-  var orig = ins.shift();
+  var name = ins.shift();
   var n    = numify(ins.shift());
 
-  var result = 0;
-  var string = orig.replace(/[aeiou]/g, '0').replace(/[^0]/g, '1');
+  var result  = 0;
+  var mlen    = 0;
+  var prefix  = -1;
+  var isVowel = {
+      a: true
+    , e: true
+    , i: true
+    , o: true
+    , u: true
+  };
+  for (var i = 0, l = name.length; i < l; ++i) {
+    if (isVowel[name[i]]) {
+      mlen = 0;
+    } else {
+      ++mlen;
 
-  var toFind = str.repeat('1', n);
-  for (var i = 0, l = string.length; i < (l - (n - 1)); ++i) {
-    var found = string.indexOf(toFind, i);
-    if (~found) {
-      //console.warn("F: ", string, i, found);
-      //console.warn(string.substr(i));
-      ++result;
-      console.warn("R: ", i, result);
-
-      var after = l - (found + n);
-      if (after > 0) {
-        console.warn("A: ", i, after);
-        result += after;
-        console.warn("R: ", i, result);
+      // record the prefixes of this position of n consonants
+      if (mlen >= n) {
+        prefix = (i - n) + 1;
       }
     }
-    console.warn('');
+
+    // the first time 'prefix' is set, it will count the substring combinations
+    //   leading up to the 'n' consonants
+    //
+    // continue incrementing to catch substring combinations including
+    //   characters after the 'n' consonants
+    //
+    // continue updating 'prefix' to account for the multiple of combinations
+    if (~prefix) {
+      result += prefix + 1;
+    }
+    //console.warn(i, prefix, result);
   }
 
   console.log(str.sprintf('Case #%d: %s', cnum, result));
