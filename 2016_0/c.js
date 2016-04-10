@@ -3,24 +3,31 @@
 var fs        = require('fs')
   , _         = require('underscore')
   , str       = require('underscore.string')
-  , Big       = require('big.js')
+  , Big       = require('bn.js')
   , input     = fs.readFileSync('/dev/stdin').toString().split(/\n/g)
   , num_cases = input.shift()
   , cnum      = 0
   , result
 ;
 
-Big.E_POS = 100;
+var zero = new Big('0', 10);
+var one  = new Big('1', 10);
+var two  = new Big('2', 10);
+var max  = new Big('10000', 10);
 
 // brute force, ho!
 function isDivisible(input) {
-  if (input === 2 || input === 1) {
-    return true;
+  if (input.eq(one) || input.eq(two)) {
+    return false;
   }
 
-  for(var i = 2, s = Math.ceil(input/2, 10); i <= s; ++i) {
-    if (input % i === 0) {
+  for(var i = new Big(2, 10), s = input.divRound(two); i.lte(s); i.iadd(one)) {
+    if (input.mod(new Big(i, 10)).eq(zero)) {
       return i;
+    }
+
+    if (i.gte(max)) {
+      return false;
     }
   }
 
@@ -29,11 +36,25 @@ function isDivisible(input) {
 
 function isJamcoin(input) {
   var r = [];
+  var v;
+  var d;
+  if (input === '10000000000000000000010101010001') {
+    //console.log('input', input);
+  }
+
   for (var b = 2; b <= 10; ++b) {
-    var v = parseInt(input, b);
+    v = new Big(input, b);
 
     //console.log('v', v);
-    var d = isDivisible(v);
+    d = isDivisible(v);
+
+    if (
+      input === '10000000000000000000010101010001' ||
+      input === '10000000000000000000011110110111' ||
+      input === '10000000000000000000011110111101'
+    ) {
+      //console.log('v.toString(10), b, d', v.toString(10), b, d.toString());
+    };
 
     if (!d) {
       return false;
@@ -56,15 +77,15 @@ while (cnum++ < num_cases) {
 
     //console.log('l', l);
 
-    var min = parseInt('1' + '0'.repeat(l-2) + '1', 2);
-    var max = parseInt('1'.repeat(l), 2);
+    var min = new Big('1' + '0'.repeat(l-2) + '1', 2);
+    var max = new Big('1'.repeat(l), 2);
 
     //console.log('max', max);
 
     var s;
     var r = [];
     var d;
-    for (var i = min; i <= max; i = i + 2) {
+    for (var i = min; i.lte(max); i.iadd(new Big('2', 10))) {
       s = i.toString(2);
 
       //console.log('s', s);
@@ -80,9 +101,7 @@ while (cnum++ < num_cases) {
       }
     }
 
-    //console.log('r', r);
-
-    console.log('Case #%d:');
+    console.log('Case #%d:', cnum);
     r.forEach(function(r) {
       console.log(r[0], r[1].join(' '));
     });
